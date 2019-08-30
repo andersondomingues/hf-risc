@@ -1,5 +1,5 @@
 # mude somente essa linha abaixo para apontar p o diretorio do hellfireos
-HFOS_ROOT=/home/16104013/Downloads/hf-risc-st
+HFOS_ROOT=/home/ale/repos/gaph/anderson/hf-risc-st
 HFOS_SW=$(HFOS_ROOT)/software/
 SIMDIR = $(HFOS_SW)/tools/sim/hf_riscv_sim/
 
@@ -33,7 +33,7 @@ link:
 
 
 app: crt
-	$(GCC_$(ARCH)) -o sort.o $(HFOS_SW)/app/sort.c -I$(HFOS_SW)/include
+	$(GCC_$(ARCH)) -I$(HFOS_SW)/include
 	@$(MAKE) --no-print-directory link
 
 sim: $(HFOS_ROOT)/tools/sim/hf_riscv_sim/hf_riscv_sim.c
@@ -42,7 +42,7 @@ sim: $(HFOS_ROOT)/tools/sim/hf_riscv_sim/hf_riscv_sim.c
 test: crt sim 
 	$(GCC_$(ARCH)) -o test.o test.c -I$(HFOS_SW)/include  # compila o teste
 	$(GCC_$(ARCH)) -o tester.o tester.c -I$(HFOS_SW)/include  # compila o testador
-	@$(MAKE) --no-print-directory app
+	@$(MAKE) --no-print-directory link
 	./hf_riscv_sim ./code.bin
 
 clean:
